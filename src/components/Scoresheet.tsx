@@ -249,57 +249,6 @@ export default function Scoresheet() {
     return `${ROUNDS[roundIndex - 1]} is wild`;
   };
 
-  const handleTestRound = () => {
-    if (data.players.length === 0) return;
-    
-    const currentRoundIndex = ROUNDS.indexOf(data.currentRound);
-    if (currentRoundIndex === -1) return;
-    
-    // Generate random scores for current round
-    // At least one player must go out (0 points), and multiple players can go out
-    const newScores = { ...data.scores };
-    
-    // Determine how many players go out (1 to min(3, total players))
-    // First player always goes out, others have a chance
-    const numPlayersWhoWentOut = Math.min(
-      Math.floor(Math.random() * Math.min(3, data.players.length)) + 1,
-      data.players.length
-    );
-    
-    // Create array of player indices and shuffle to randomly select who goes out
-    const playerIndices = Array.from({ length: data.players.length }, (_, i) => i);
-    for (let i = playerIndices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [playerIndices[i], playerIndices[j]] = [playerIndices[j], playerIndices[i]];
-    }
-    
-    // First numPlayersWhoWentOut players in shuffled array go out
-    const wentOutIndices = new Set(playerIndices.slice(0, numPlayersWhoWentOut));
-    
-    data.players.forEach((_, index) => {
-      const key = String(index);
-      if (!newScores[key]) {
-        newScores[key] = {} as Record<Round, number>;
-      }
-      
-      if (wentOutIndices.has(index)) {
-        newScores[key][data.currentRound] = 0;
-      } else {
-        // Random score between 5 and 150
-        newScores[key][data.currentRound] = Math.floor(Math.random() * 146) + 5;
-      }
-    });
-    
-    // Advance to next round if not the last round
-    const nextRoundIndex = currentRoundIndex + 1;
-    const nextRound = nextRoundIndex < ROUNDS.length ? ROUNDS[nextRoundIndex] : data.currentRound;
-    
-    setData((prev) => ({
-      ...prev,
-      scores: newScores,
-      currentRound: nextRound,
-    }));
-  };
 
   const lowestTotal = getLowestTotal();
 
