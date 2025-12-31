@@ -273,8 +273,12 @@ export default function PlayGame() {
     }
   }, [gameState]);
 
-  // Sync current player's hand to MeldHelper when in playing phase
+  // Sync current player's hand to MeldHelper when in playing phase (only if Play Game is enabled)
   useEffect(() => {
+    // Check if Play Game mode is enabled via localStorage
+    const playGameEnabled = localStorage.getItem('playGameEnabled') === 'true';
+    if (!playGameEnabled) return;
+    
     if (gameState.phase === 'playing' && gameState.playerHands.length > 0) {
       const currentHand = gameState.playerHands[gameState.currentPlayerIndex];
       const round = roundNumberToRound(gameState.currentRound);
@@ -296,8 +300,12 @@ export default function PlayGame() {
     }
   }, [gameState.phase, gameState.currentPlayerIndex, gameState.playerHands, gameState.currentRound, gameState.discardPile]);
 
-  // Sync players and current round to Scoresheet when in playing phase
+  // Sync players and current round to Scoresheet when in playing phase (only if Play Game is enabled)
   useEffect(() => {
+    // Check if Play Game mode is enabled via localStorage
+    const playGameEnabled = localStorage.getItem('playGameEnabled') === 'true';
+    if (!playGameEnabled) return;
+    
     if (gameState.phase === 'playing' && gameState.players.length > 0) {
       const round = roundNumberToRound(gameState.currentRound);
       const scoresheetKey = '5crowns-scoresheet';
@@ -369,6 +377,10 @@ export default function PlayGame() {
         gameState={gameState}
         onEnterScores={(scores) => {
           dispatch({ type: 'ENTER_SCORES', scores });
+          
+          // Check if Play Game mode is enabled
+          const playGameEnabled = localStorage.getItem('playGameEnabled') === 'true';
+          if (!playGameEnabled) return;
           
           // Sync scores to Scoresheet
           const round = roundNumberToRound(gameState.currentRound);

@@ -26,7 +26,11 @@ const STORAGE_KEY = '5crowns-meldhelper';
 const SUITS: Suit[] = ['clubs', 'diamonds', 'hearts', 'spades', 'stars'];
 const RANKS: Rank[] = ['3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'Joker'];
 
-export default function MeldHelper() {
+interface MeldHelperProps {
+  isPlayGameEnabled?: boolean;
+}
+
+export default function MeldHelper({ isPlayGameEnabled: _isPlayGameEnabled = false }: MeldHelperProps) {
   const isLoadingFromStorage = useRef(false);
   
   const [cards, setCards] = useState<Card[]>(() => {
