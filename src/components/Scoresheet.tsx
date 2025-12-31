@@ -344,16 +344,16 @@ export default function Scoresheet() {
 
       {/* Score Grid */}
       <div className="bg-white rounded-xl shadow-md overflow-hidden">
-        <div className="overflow-hidden">
-          <table className="w-full text-xs sm:text-sm md:text-base" style={{ tableLayout: 'fixed' }}>
+        <div className="overflow-hidden md:overflow-visible">
+          <table className="w-full text-xs sm:text-sm md:text-base">
             <thead className="bg-gray-50 border-b-2 border-gray-200">
               <tr>
-                <th className="px-1 py-1 sm:px-2 sm:py-2 md:px-4 md:py-3 text-left font-bold text-gray-900 
-                               bg-gray-50 border-r border-gray-200" style={{ width: '50px' }}>
+                <th className="px-1 py-1 sm:px-2 sm:py-2 md:px-4 md:py-3 text-left font-bold text-gray-900 sticky left-0
+                               bg-gray-50 border-r border-gray-200 w-[50px] sm:w-[70px] md:w-auto md:min-w-[120px] z-10">
                   Round
                 </th>
                 {data.players.map((player, index) => (
-                  <th key={index} className="px-0.5 py-1 sm:px-1 sm:py-1.5 md:px-4 md:py-3 text-center">
+                  <th key={index} className="px-0.5 py-1 sm:px-1 sm:py-1.5 md:px-4 md:py-3 text-center md:min-w-[140px]">
                     {editingPlayer === index ? (
                       <input
                         type="text"
@@ -410,7 +410,7 @@ export default function Scoresheet() {
                                ${roundIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
                     onClick={() => handleSetCurrentRound(round)}
                   >
-                    <td className="px-1 py-1 sm:px-2 sm:py-1.5 md:px-4 md:py-3 bg-inherit border-r border-gray-200">
+                    <td className="px-1 py-1 sm:px-2 sm:py-1.5 md:px-4 md:py-3 sticky left-0 bg-inherit border-r border-gray-200 z-10">
                       <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
                         <span className="text-xs sm:text-sm md:text-lg font-bold text-gray-900">{round}</span>
                         <span className="px-1 py-0.5 sm:px-1.5 sm:py-0.5 md:px-2 md:py-1 bg-amber-100 text-amber-800 
@@ -448,7 +448,7 @@ export default function Scoresheet() {
                 );
               })}
               <tr className="bg-gray-100 border-t-2 border-gray-300 font-bold">
-                <td className="px-1 py-1 sm:px-2 sm:py-2 md:px-4 md:py-4 bg-gray-100 border-r border-gray-300">
+                <td className="px-1 py-1 sm:px-2 sm:py-2 md:px-4 md:py-4 sticky left-0 bg-gray-100 border-r border-gray-300 z-10">
                   <span className="text-xs sm:text-sm md:text-lg text-gray-900">Total</span>
                 </td>
                 {data.players.map((_, playerIndex) => {
