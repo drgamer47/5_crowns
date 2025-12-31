@@ -271,15 +271,6 @@ export default function Scoresheet() {
               Add Player
             </button>
             <button
-              onClick={handleTestRound}
-              className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-purple-600 text-white rounded-lg 
-                         text-xs sm:text-sm md:text-base font-medium 
-                         hover:bg-purple-700 transition-colors shadow-sm hover:shadow-md"
-              title="Generate random scores for current round and advance to next round"
-            >
-              Test Round
-            </button>
-            <button
               onClick={handleClearAll}
               className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-red-500 text-white rounded-lg 
                          text-xs sm:text-sm md:text-base font-medium 
