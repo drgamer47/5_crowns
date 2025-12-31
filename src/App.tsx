@@ -73,11 +73,11 @@ export default function App() {
       <div className="bg-white shadow-md border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-1 min-w-0 overflow-x-auto">
               {(['scoresheet', 'meldhelper', ...(isPlayGameEnabled ? ['playgame'] : [])] as Tab[]).map(tab => (
                 <button
                   key={tab}
-                  className={`px-6 py-4 font-semibold text-base border-b-4 transition-colors ${
+                  className={`px-6 py-4 font-semibold text-base border-b-4 transition-colors whitespace-nowrap ${
                     activeTab === tab
                       ? 'border-blue-600 text-blue-600'
                       : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
@@ -93,10 +93,10 @@ export default function App() {
             </div>
             
             {/* Play Game Mode Toggle */}
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-700 hidden sm:inline">Play Game Mode</span>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="text-sm text-gray-700 hidden sm:inline whitespace-nowrap">Play Game Mode</span>
               <button
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex-shrink-0 ${
                   isPlayGameEnabled ? 'bg-blue-600' : 'bg-gray-300'
                 }`}
                 onClick={handleToggle}
